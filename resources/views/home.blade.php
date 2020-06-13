@@ -20,7 +20,7 @@
                 <div class="card-header">Comments</div>
 
                 <div class="card-body">
-                    <example-component></example-component>
+                    <comments></comments>
                 </div>
             </div>
         </div>
