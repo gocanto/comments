@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Comments PHPMD ruleset">
+    <description> Comments PHP coding ruleset </description>
+
+    <rule ref="PSR2" />
+
+</ruleset>
