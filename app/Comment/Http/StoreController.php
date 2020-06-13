@@ -7,7 +7,7 @@ namespace App\Comment\Http;
 use App\Comment\Repository\CommentsRepository;
 use Illuminate\Http\JsonResponse;
 
-class ShowController
+class StoreController
 {
     private CommentsRepository $repository;
 
@@ -16,10 +16,12 @@ class ShowController
         $this->repository = $repository;
     }
 
-    public function __invoke(): JsonResponse
+    public function __invoke(StoreCommentRequest $request): JsonResponse
     {
-        $tree = $this->repository->getTree();
+        $comment = $this->repository->create(
+            $request->getData()
+        );
 
-        return new JsonResponse($tree->toArray(), JsonResponse::HTTP_OK);
+        return new JsonResponse($comment->toArray(), JsonResponse::HTTP_CREATED);
     }
 }
