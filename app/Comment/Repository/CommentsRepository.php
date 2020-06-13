@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Comment\Repository;
 
 use App\Comment\Comment;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class CommentsRepository
 {
