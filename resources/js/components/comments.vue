@@ -4,7 +4,7 @@
             {{ comment.body }}
 
             <div class="m-3">
-                <a href="#" @click.prevent="addReplay(comment)">Replay</a>
+                <replay :parent-id="comment.id"></replay>
             </div>
 
             <template v-if="comment.tree">
@@ -21,8 +21,7 @@
 
 <script>
 
-    import axios from 'axios'
-    import Swal from 'sweetalert2'
+    import Replay from './replay'
 
     export default {
         name: 'comments',
@@ -37,6 +36,10 @@
                 type: Number,
                 default: 0,
             },
+        },
+
+        components: {
+            Replay,
         },
 
         data() {
@@ -84,37 +87,6 @@
                 this.childrenCount++;
                 this.$emit('born');
             },
-
-            async addReplay(comment) {
-                const { value: text } = await Swal.fire({
-                    input: 'textarea',
-                    inputPlaceholder: 'Type your message here...',
-                    inputAttributes: {
-                        'aria-label': 'Type your message here'
-                    },
-                    showCancelButton: true,
-                    inputValidator: (value) => {
-                        const body = value.trim();
-
-                        return new Promise((resolve) => {
-                            if (body.length > 0) {
-                                resolve()
-                            } else {
-                                resolve('The replay is required.')
-                            }
-                        })
-                    }
-                })
-
-                if (!text) {
-                    return
-                }
-
-                axios.post('api/comments', {
-                    body: text,
-                    parent_id: comment.id,
-                }).then(() => location.reload())
-            }
         },
     }
 </script>

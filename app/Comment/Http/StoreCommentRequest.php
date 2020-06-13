@@ -10,10 +10,15 @@ class StoreCommentRequest extends FormRequest
 {
     public function rules(): array
     {
-        return [
+        $rules = [
             'body' => ['required'],
-            'parent_id' => 'exists:comments,id',
         ];
+
+        if ($this->input('parent_id') !== null) {
+            $rules['parent_id'] = 'exists:comments,id';
+        }
+
+        return $rules;
     }
 
     public function getData(): array
