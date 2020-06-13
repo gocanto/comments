@@ -6,6 +6,6 @@ class HomeController
 {
     public function __invoke()
     {
-        return 'here';
+        return view('home');
     }
 }

@@ -63,14 +63,6 @@ class Handler extends ExceptionHandler
             ], JsonResponse::HTTP_FORBIDDEN);
         }
 
-        if ($exception instanceof NotFoundHttpException) {
-            return new JsonResponse([
-                'message' => $exception->getMessage(),
-            ], JsonResponse::HTTP_NOT_FOUND);
-        }
-
-        return new JsonResponse([
-            'message' => $exception->getMessage(),
-        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        return parent::render($request, $exception);
     }
 }
