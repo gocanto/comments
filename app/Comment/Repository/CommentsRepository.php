@@ -11,7 +11,7 @@ class CommentsRepository
 {
     public function getTree(int $limit = 50): Collection
     {
-        return Comment::with('tree')->take($limit)->get();
+        return Comment::with('tree')->whereNull('parent_id')->take($limit)->get();
     }
 
     public function create(array $attributes): Comment
